@@ -1,0 +1,309 @@
+---
+title: "Galois Tech Talk"
+author: "Brad Boehmke"
+date: "2021-02-05"
+output:
+  xaringan::moon_reader:
+    css: ["custom.css", "style.css"]
+    self_contained: false
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+class: alt-title-slide   
+
+<br><br><br><br><br><br><br>
+.font200.black[Some Clever Title]
+
+.font120[Bradley Boehmke]
+
+.font120[Add URL]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Setting expectations]
+
+---
+class: no-header-slide
+
+<br><br><br><br>
+.font150.pull-right[
+
+* Who am I
+
+* What I currently do
+
+* Past research interests
+
+]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Who am I]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="80%", out.height="80%"}
+knitr::include_graphics("figures/fam.png")
+```
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+```{r map-home, echo=FALSE}
+library(ggmap)
+#library(leaflet)
+#register_google("AIzaSyBnYq_MgT5dwW9FJrkESKBVtUWcM_UF4Zg")
+
+home <- tibble(
+   Longitude = c(-84.015850),
+   Latitude = c(39.692720)
+   )
+
+#us <- get_map(location='united states', zoom=4, maptype = "satellite",
+#              source='google',color='color')
+# 
+#ggmap(us) + 
+#  geom_point(data = home, aes(x = Longitude, y = Latitude)) +
+#  theme(axis.title = element_blank(),
+#        axis.text = element_blank(),
+#        axis.ticks = element_blank())
+# 
+# home %>% 
+#   qmplot(Longitude, Latitude, data = ., 
+#          maptype = "toner-background", darken = .7, size = I(2.5)) + 
+#   theme(axis.title = element_blank(),
+#         axis.text = element_blank())
+
+leaflet() %>% 
+  addTiles() %>%
+  setView(lat = 39.692720, lng = -84.015850, zoom=5) %>%
+  addMarkers(lng=-84.015850, lat=39.692720)
+
+#leaflet() %>% 
+#  addProviderTiles('Esri.WorldImagery') %>%
+#  setView(lat = 39.692720, lng = -84.015850, zoom=5) %>%
+#  addMarkers(lng=-84.015850, lat=39.692720)
+```
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+<img src="figures/ndsu.png" align="middle" alt="NDSU" width="150" /> &ensp;&ensp; .font120[B.S. Kinesiology]
+
+<br>
+
+<img src="figures/afit.png" align="middle" alt="AFIT" width="150" /> &ensp;&ensp; .font120[M.S. Cost Analytics]
+
+<br>
+
+<img src="figures/afit.png" align="middle" alt="AFIT" width="150" /> &ensp;&ensp; .font120[PhD Logistics]
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+Air Force &ensp; &ensp; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#62; Finance Officer
+
+Booz Allen Hamilton &ensp; &#8729; &#8729; &#8729; &#62; Cost Analyst
+
+Air Force A9 &ensp; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#62; OR Analyst
+
+AFIT &ensp; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#62; Professor
+
+University of Cincinnati &ensp; &#8729; &#62; Adjunct
+
+Ascend Innovations  &ensp; &#8729; &#8729; &#8729; &#8729; &#62; Data Scientist
+
+84.51° &ensp; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#8729; &#62; Director, Data Science
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+
+.pull-right.scrollable90[
+
+* Intro to `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Intro-R)
+* Intro to `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/intro-python-datasci)
+* Intermediate `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Intermediate-R)
+* Intermediate `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/intermediate-python-datasci)
+* Data Wrangling with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](http://uc-r.github.io/data_wrangling)
+* Machine Learning with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Advanced-R)
+* Advanced `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/advanced-python-datasci)
+* Deep Learning with Keras and TensorFlow [`r fontawesome::fa("link", height = 15)`](https://github.com/rstudio-conf-2020/dl-keras-tf)
+* Delivering Data Science Products via Packages [`r fontawesome::fa("link", height = 15)`](https://github.com/misk-data-science/misk-packages)
+* Text Mining with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://afit-r.github.io/logm655)
+* Forecasting with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://afit-r.github.io/logm630)
+* Interpretable Machine Learning [`r fontawesome::fa("link", height = 15)`](https://github.com/bradleyboehmke/CinDay-RUG-IML-2018)
+* DevOps for Data Science (internal)
+
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="49%", out.height="20%", fig.show='hold'}
+knitr::include_graphics(c("https://images-na.ssl-images-amazon.com/images/I/41ttvv4UJ%2BL._SX331_BO1,204,203,200_.jpghttps://images.tandf.co.uk/common/jackets/amazon/978113849/9781138495685.jpg", "https://images.tandf.co.uk/common/jackets/amazon/978113849/9781138495685.jpg"))
+```
+
+```{r, eval=FALSE, echo=FALSE, out.height=400}
+knitr::include_graphics("https://images.tandf.co.uk/common/jackets/amazon/978113849/9781138495685.jpg")
+```
+
+]
+
+
+---
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+.pull-right[
+
+<br><br>
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/r-contributions.png")
+```
+
+]
+
+---
+
+# About me  <img src="figures/about_me_bitmoji.png" height="60" width="60", align="right">
+
+<br>
+
+.pull-left[
+
+```{r echo=FALSE}
+knitr::include_graphics("figures/name-tag.png")
+```
+
+]
+
+
+.font120.pull-right[
+<br><br>
+[`r fontawesome::fa("globe", fill = "steelblue")`](http://bradleyboehmke.github.io/) bradleyboehmke.github.io  <br>
+[`r fontawesome::fa("github", fill = "steelblue")`](https://github.com/bradleyboehmke/) @bradleyboehmke  <br>
+[`r fontawesome::fa("twitter", fill = "steelblue")`](https://twitter.com/bradleyboehmke) @bradleyboehmke  <br>
+[`r anicon::aia("google-scholar", color = "steelblue", animate = FALSE)`](http://bit.ly/bradleyboehmke_scholar) bit.ly/bradleyboehmke_scholar <br>
+[`r fontawesome::fa("envelope", fill = "steelblue")`](mailto:bradleyboehmke@gmail.com) bradleyboehmke@gmail.com  
+
+]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[What I currently do]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Past research]
