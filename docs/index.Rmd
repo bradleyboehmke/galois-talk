@@ -18,12 +18,12 @@ output:
 
 class: alt-title-slide   
 
-<br><br><br><br><br><br><br>
-.font200.black[Some Clever Title]
+<br><br><br><br><br><br><br><br>
+.font200.black[Road to Galois?]
 
 .font120[Bradley Boehmke]
 
-.font120[Add URL]
+.font120[[bit.ly/bb_galois](http://bit.ly/bb_galois)]
 
 ---
 class: section-slide 
@@ -34,12 +34,48 @@ class: section-slide
 ---
 class: no-header-slide
 
-<br><br><br><br>
+<br><br>
+
+.pull-left.font110[
+
+]
+
+<br>
 .font150.pull-right[
 
 * Who am I
 
-* What I currently do
+* Current focus
+
+* Past research interests
+
+]
+
+---
+class: no-header-slide
+
+<br><br>
+
+.pull-left.font110[
+
+### TL;DR
+
+* Data scientist (1) | Software engineer (2)
+
+* Open source development
+
+* Build tools for other data scientists
+
+* Misses ML research
+
+]
+
+<br>
+.opacity10.font150.pull-right[
+
+* Who am I
+
+* Current focus
 
 * Past research interests
 
@@ -204,18 +240,17 @@ knitr::include_graphics("figures/name-tag.png")
 
 .pull-right.scrollable90[
 
-* Intro to `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Intro-R)
-* Intro to `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/intro-python-datasci)
-* Intermediate `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Intermediate-R)
-* Intermediate `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/intermediate-python-datasci)
-* Data Wrangling with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](http://uc-r.github.io/data_wrangling)
-* Machine Learning with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-r/Advanced-R)
-* Advanced `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15)`](https://github.com/uc-python/advanced-python-datasci)
-* Deep Learning with Keras and TensorFlow [`r fontawesome::fa("link", height = 15)`](https://github.com/rstudio-conf-2020/dl-keras-tf)
-* Delivering Data Science Products via Packages [`r fontawesome::fa("link", height = 15)`](https://github.com/misk-data-science/misk-packages)
-* Text Mining with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://afit-r.github.io/logm655)
-* Forecasting with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15)`](https://afit-r.github.io/logm630)
-* Interpretable Machine Learning [`r fontawesome::fa("link", height = 15)`](https://github.com/bradleyboehmke/CinDay-RUG-IML-2018)
+* Intro to `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-r/Intro-R)
+* Intro to `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-python/intro-python-datasci)
+* Intermediate `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-r/Intermediate-R)
+* Intermediate `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-python/intermediate-python-datasci)
+* Data Wrangling with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](http://uc-r.github.io/data_wrangling)
+* Machine Learning with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-r/Advanced-R)
+* Advanced `r fontawesome::fa("python")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/uc-python/advanced-python-datasci)
+* Deep Learning with Keras and TensorFlow [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/rstudio-conf-2020/dl-keras-tf)
+* Delivering Data Science Products via Packages [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/misk-data-science/misk-packages)
+* Text Mining with `r fontawesome::fa("r-project")` [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/bradleyboehmke/R-Training-Text-Mining)
+* Interpretable Machine Learning [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/bradleyboehmke/CinDay-RUG-IML-2018)
 * DevOps for Data Science (internal)
 
 
@@ -300,10 +335,690 @@ knitr::include_graphics("figures/name-tag.png")
 class: section-slide 
 
 <br><br><br><br><br><br><br><br><br><br><br>
-# .font150[What I currently do]
+# .font150[Current focus]
+
+---
+# The setting
+
+<br>
+
+.pull-left[
+
+<br><br>
+
+```{r, echo=FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("figures/8451_logo.jpeg")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="60%", fig.align='center'}
+knitr::include_graphics("figures/kroger-logo.png")
+```
+
+]
+
+<br>
+
+.center.content-box-grey.bold[_The data science arm of Kroger_]
+
+---
+# The setting
+
+<br>
+
+.pull-left[
+
+<br><br>
+
+```{r, echo=FALSE, out.width="75%", fig.align='center'}
+knitr::include_graphics("figures/8451_logo.jpeg")
+```
+
+]
+
+.pull-right[
+
+<br><br><br>
+
+```{r, echo=FALSE, out.width="90%", fig.align='center'}
+knitr::include_graphics("figures/fredmeyer-logo.png")
+```
+
+]
+
+<br><br>
+
+.center.content-box-grey.bold[_The data science arm of Kroger...and even .red[Portland] subsidiaries!_]
+
+---
+# The setting
+
+- 500 CSAs
+
+- 250 Data scientist
+
+- 250 Engineers
+
+--
+
+   - 75 Data engineers
+   
+   - 50 Platform/infrastructure devs
+   
+   - 25 App devs
+   
+   - 100 other (i.e. security, networking)
+
+
+---
+# The setting
+
+.pull-left[
+
+- 500 CSAs
+
+- .blue.bold[250 Data scientist]
+
+- 250 Engineers
+
+   - .blue.bold[75 Data engineers]
+   
+   - 50 Platform/infrastructure devs
+   
+   - 25 App devs
+   
+   - 100 other (i.e. security, networking)
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, fig.align='center'}
+library(DiagrammeR)
+
+mermaid("
+graph BT
+A[Environment]-->B[Data ingestion]
+B-->C[Data wrangling]
+C-->D[Data analysis]
+D-->E[Modeling]
+E-->F[Post analysis]
+")
+```
+
+]
+
+---
+# The problem
+
+.pull-left.font120[
+
+- Multi-environment (Azure, GCP, On-prem)
+
+]
+
+.pull-right.font120[
+
+- Common procedures with uncommon execution
+
+]
+
+---
+# The problem
+
+.pull-left[
+
+- Multi-environment (Azure, GCP, On-prem)
+<br><br>
+
+- Business logic
+
+]
+
+.pull-right[
+
+- Common procedures with uncommon execution
+
+- Programmatic differences lead to variances in results
+
+]
+
+---
+# The problem
+
+.pull-left[
+
+- Multi-environment (Azure, GCP, On-prem)
+<br><br>
+
+- Business logic
+<br><br>
+
+- Code quality
+
+]
+
+.pull-right[
+
+- Common procedures with uncommon execution
+
+- Programmatic differences lead to variances in results
+
+- Results in code smells and excessive code reviews
+
+]
+
+---
+# The problem
+
+.pull-left[
+
+- Multi-environment (Azure, GCP, On-prem)
+<br><br>
+
+- Business logic
+<br><br>
+
+- Code quality
+<br><br>
+
+- Best practices
+
+]
+
+.pull-right[
+
+- Common procedures with uncommon execution
+
+- Programmatic differences lead to variances in results
+
+- Results in code smells and excessive code reviews
+
+- Leads to resource inefficiencies and execution inconsistencies
+
+]
+
+---
+# The problem
+
+.pull-left[
+
+- Multi-environment (Azure, GCP, On-prem)
+<br><br>
+
+- Business logic
+<br><br>
+
+- Code quality
+<br><br>
+
+- Best practices
+<br><br>
+
+- Reproducibility
+
+]
+
+.pull-right[
+
+- Common procedures with uncommon execution
+
+- Programmatic differences lead to variances in results
+
+- Results in code smells and excessive code reviews
+
+- Leads to resource inefficiencies and execution inconsistencies
+
+- Debugging nightmares, migration headaches, decision maker distrust
+
+]
+
+---
+# Enter APTS
+
+.pull-left[
+
+Advanced Programming & Technology Solutions (APTS) Team
+
+* Data science developers
+
+* Simplifying technology to make our data scientists more efficient
+
+* Informing & educating data scientist on technology advancements
+
+* Steering technology development to align with DSR needs
+
+
+]
+
+.pull-right[
+
+]
+
+---
+# Enter APTS
+
+.pull-left[
+
+Advanced Programming & Technology Solutions (APTS) Team
+
+* .blue[Data science developers]
+
+* .blue[Simplifying technology to make our data scientists more efficient]
+
+* Informing & educating data scientist on technology advancements
+
+* Steering technology development to align with DSR needs
+
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE}
+mermaid("
+graph BT
+  A[Environment]-->B[Data ingestion]
+  B-->C[Data wrangling]
+  C-->D[Data analysis]
+  D-->E[Modeling]
+  E-->F[Post analysis]
+  G(Poirot, Component Logger, Curated Conda Env)-->H(Effodata, Seg, FileFinder)
+  H-->I(Effodata, Seg)
+  I-->J(KPI, UPC Input, Trial & Repeat)
+  J-->K(Drpyspark)
+  ")
+```
+
+]
+
+---
+# An ~~open~~ inner source ecosystem is born
+
+.pull-left[
+
+
+
+```{r, echo=FALSE, eval=FALSE}
+mermaid("
+graph BT
+  A(Scarlett)-->B(PIQdata, Ecomm)
+  B-->C(Fenix, PPM, Auditorium)
+  C-->D(SNAP, Telomere )
+  D-->E(Polaris, Screenr)
+  E-->F(Polaris, Veracity)
+  ")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE}
+mermaid("
+graph BT
+  A[Environment]-->B[Data ingestion]
+  B-->C[Data wrangling]
+  C-->D[Data analysis]
+  D-->E[Modeling]
+  E-->F[Post analysis]
+  G(Poirot, Component Logger, Curated Conda Env)-->H(Effodata, Seg, FileFinder)
+  H-->I(Effodata, Seg)
+  I-->J(KPI, UPC Input, Trial & Repeat)
+  J-->K(Drpyspark)
+  ")
+```
+
+]
+
+---
+# Problem #2
+
+.pull-left[
+
+Package inconsistencies
+
+]
+
+.pull-right[
+
+Packaging template tool
+
+]
+
+---
+# Ecosystem characteristics
+
+.pull-left[
+
+Package characteristics
+
+- Commonly structured
+
+]
+
+.pull-right[
+
+Packages as legos
+
+]
 
 ---
 class: section-slide 
 
 <br><br><br><br><br><br><br><br><br><br><br>
 # .font150[Past research]
+
+---
+# Focus areas
+
+.pull-left[
+
+### Machine Learning application
+
+* Improving ML interpretability
+   <br><br><br><br>
+   
+* ML application for resource allocation
+
+]
+
+---
+# Focus areas
+
+.pull-left[
+
+### Machine Learning application
+
+* Improving ML interpretability
+   - Variable importance measures [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
+   - Residuals & diagnostics for binary & ordinal regression [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=Residuals+and+diagnostics+for+binary+and+ordinal+regression+models%3A+An+introduction+to+the+sure+package.&btnG=)
+   
+* ML application for resource allocation
+   - Cyber anomaly detection [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://journals.sagepub.com/doi/full/10.1177/1748301818791503)
+   - Strategic purchasing [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.sciencedirect.com/science/article/abs/pii/S1478409217300687)
+   - Humanitarian logistics [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://link.springer.com/article/10.1007/s10479-017-2607-z)
+   - Force structure impacts to cost [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2016.1155186)
+   - Performance trend analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2015.1064046)
+   - Performance efficiency analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.jstor.org/stable/26296084?seq=1)
+
+
+]
+
+--
+
+.pull-right.font90[
+
+### Open source development
+
+<br><br>
+vip package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/vip)<br>
+sure package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/sure)
+<br><br><br><br>
+anomalyDetection package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/anomalyDetection)<br>
+KraljicMatrix package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/KraljicMatrix)<br>
+
+
+]
+
+---
+# Focus areas
+
+.pull-left[
+
+### Machine Learning application
+
+* Improving ML interpretability
+   - .bold.blue[Variable importance measures] [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
+   - Residuals & diagnostics for binary & ordinal regression [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=Residuals+and+diagnostics+for+binary+and+ordinal+regression+models%3A+An+introduction+to+the+sure+package.&btnG=)
+   
+* ML application for resource allocation
+   - Cyber anomaly detection [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://journals.sagepub.com/doi/full/10.1177/1748301818791503)
+   - Strategic purchasing [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.sciencedirect.com/science/article/abs/pii/S1478409217300687)
+   - Humanitarian logistics [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://link.springer.com/article/10.1007/s10479-017-2607-z)
+   - Force structure impacts to cost [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2016.1155186)
+   - Performance trend analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2015.1064046)
+   - Performance efficiency analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.jstor.org/stable/26296084?seq=1)
+
+
+]
+
+.pull-right.font90[
+
+### Open source development
+
+<br><br>
+.bold.blue[vip package] [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/vip)<br>
+sure package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/sure)
+<br><br><br><br>
+anomalyDetection package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/anomalyDetection)<br>
+KraljicMatrix package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/KraljicMatrix)<br>
+
+
+]
+
+
+---
+# Variable importance
+
+.pull-left[
+
+Objectives:
+
+1. Provide a single consistent interface for computing and visualizing variable importance for many types of supervised learning models across a number of packages.
+
+2. Provide model-agnostic approaches for computing variable importance.
+
+]
+
+.pull-right[
+
+
+]
+
+---
+# Consistent interface
+
+.pull-left[
+
+Objectives:
+
+1. Provide a single consistent interface for computing and visualizing variable importance for many types of supervised learning models across a number of packages.
+
+  - each model requires unique approach to get variable importance data
+  - output object differs based on model
+
+]
+
+.pull-right.scrollable90[
+
+```{r, echo=FALSE, results='hide'}
+# Simulate training data
+set.seed(101)  # for reproducibility
+trn <- as.data.frame(mlbench::mlbench.friedman1(500))
+
+# Load required packages
+library(xgboost)  # for fitting GBMs
+library(ranger)   # for fitting random forests
+library(rpart)    # for fitting CART-like decision trees
+library(nnet)     # feed forward neural network
+library(earth)
+
+# Fit a single regression tree
+tree <- rpart(y ~ ., data = trn)
+
+# Fit a random forest
+set.seed(101)
+rf <- ranger(y ~ ., data = trn, importance = "impurity")
+
+# Fit a GBM
+set.seed(102)
+gbm <- xgboost(
+  data = data.matrix(subset(trn, select = -y)),
+  label = trn$y, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+
+# Fit a LM
+lm <- lm(y ~ .^2, data = trn)
+backward <- step(linmod, direction = "backward", trace = 0)
+
+# Fit a neural network
+set.seed(0803)
+nn <- nnet(y ~ ., data = trn, size = 7, decay = 0.1, linout = TRUE)
+
+# Fit a MARS model
+mars <- earth(y ~ ., data = trn, degree = 2, pmethod = "exhaustive")
+```
+
+```{r, collapse=TRUE}
+# VI for RF
+rf$variable.importance
+
+# VI for GBM
+xgb.importance(model = gbm)
+
+## VI for MARS
+earth::evimp(mars)
+
+# VI for LM
+broom::tidy(lm)[, c("term", "statistic")]
+
+# VI for NN
+NeuralNetTools::garson(nn, bar_plot = FALSE)
+```
+
+
+]
+
+---
+# Consistent interface
+
+.pull-left[
+
+Objectives:
+
+1. Provide a single consistent interface for **computing** and visualizing variable importance for many types of supervised learning models across a number of packages.
+
+  - each model requires unique approach to get variable importance data
+  - output object differs based on model
+  - .bold[vip simplifies and standardizes this process]
+
+]
+
+.pull-right.scrollable90[
+
+```{r, collapse=TRUE, message=FALSE}
+library(vip)
+
+# VI for RF
+vi(rf, scale = TRUE)
+
+# VI for GBM
+vi(gbm, scale = TRUE)
+
+## VI for MARS
+vi(mars, scale = TRUE)
+
+# VI for LM
+vi(lm, scale = TRUE)
+
+# VI for NN
+vi(nn, scale = TRUE)
+```
+
+
+]
+
+---
+# Consistent interface
+
+.pull-left[
+
+Objectives:
+
+1. Provide a single consistent interface for computing and .bold[visualizing] variable importance for many types of supervised learning models across a number of packages.
+
+  - each model requires unique approach to get variable importance data
+  - output object differs based on model
+  - vip simplifies and standardizes this process
+  - .bold[and common plotting allows for easy comparison]
+
+]
+
+.pull-right.scrollable90[
+
+```{r, fig.height=5}
+# Plot VI scores
+p1 <- vip(lm, scale = TRUE) + ggtitle("Linear Regression")
+p2 <- vip(rf, scale = TRUE) + ggtitle("Random Forest")
+p3 <- vip(gbm, scale = TRUE) + ggtitle("XGBoost")
+p4 <- vip(nn, scale = TRUE) + ggtitle("Neural Net")
+
+# Display plots side by side
+grid.arrange(p1, p2, p3, p4, ncol = 2)
+```
+
+
+```{r, collapse=TRUE, message=FALSE, eval=FALSE, echo=FALSE}
+models <- list(rf = rf, gbm = gbm, mars = mars, lm = lm, nn = nn)
+model_plots <- purrr::map2(models, names(models), ~ vip(.x, scale = TRUE) + ggtitle(.y))
+do.call("grid.arrange", model_plots)
+```
+
+]
+
+---
+.pull-left[
+
+Objectives:
+
+1. Provide a single consistent interface for computing and .bold[visualizing] variable importance for many types of supervised learning models across a number of packages.
+
+  - each model requires unique approach to get variable importance data
+  - output object differs based on model
+  - vip simplifies and standardizes this process
+  - and common plotting allows for easy comparison
+  - .bold[supports the 34 major ML approaches in R]
+
+]
+
+.pull-right.scrollable90[
+
+```{r, echo=FALSE}
+library(kableExtra)
+options(dplyr.print_max = 1e9)
+
+as.character(methods(vi_model)) %>% 
+  str_remove_all("vi_model\\.") %>% 
+  as_tibble_col(column_name = "Models") %>%
+  rownames_to_column() %>%
+  rename(Tally = "rowname") %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 10)
+```
+
+]
+
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Final Words]
+
+---
+# Future research interests
+
+- Advancing IML methods (statistical, visual, scale)
+
+- Model quality vs. IML trust
+
+- TBD
