@@ -126,11 +126,11 @@ knitr::include_graphics("figures/name-tag.png")
 .pull-right[
 
 ```{r map-home, echo=FALSE}
-library(ggmap)
-#library(leaflet)
+#library(ggmap)
+library(leaflet)
 #register_google("AIzaSyBnYq_MgT5dwW9FJrkESKBVtUWcM_UF4Zg")
 
-home <- tibble(
+home <- tibble::tibble(
    Longitude = c(-84.015850),
    Latitude = c(39.692720)
    )
@@ -331,474 +331,726 @@ knitr::include_graphics("figures/name-tag.png")
 
 ]
 
----
-class: section-slide 
-
-<br><br><br><br><br><br><br><br><br><br><br>
-# .font150[Current focus]
-
----
-# The setting
-
-<br>
-
-.pull-left[
-
-<br><br>
-
-```{r, echo=FALSE, out.width="75%", fig.align='center'}
-knitr::include_graphics("figures/8451_logo.jpeg")
-```
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE, out.width="60%", fig.align='center'}
-knitr::include_graphics("figures/kroger-logo.png")
-```
-
-]
-
-<br>
-
-.center.content-box-grey.bold[_The data science arm of Kroger_]
-
----
-# The setting
-
-<br>
-
-.pull-left[
-
-<br><br>
-
-```{r, echo=FALSE, out.width="75%", fig.align='center'}
-knitr::include_graphics("figures/8451_logo.jpeg")
-```
-
-]
-
-.pull-right[
-
-<br><br><br>
-
-```{r, echo=FALSE, out.width="90%", fig.align='center'}
-knitr::include_graphics("figures/fredmeyer-logo.png")
-```
-
-]
-
-<br><br>
-
-.center.content-box-grey.bold[_The data science arm of Kroger...and even .red[Portland] subsidiaries!_]
-
----
-# The setting
-
-- 500 CSAs
-
-- 250 Data scientist
-
-- 250 Engineers
-
---
-
-   - 75 Data engineers
-   
-   - 50 Platform/infrastructure devs
-   
-   - 25 App devs
-   
-   - 100 other (i.e. security, networking)
-
-
----
-# The setting
-
-.pull-left[
-
-- 500 CSAs
-
-- .blue.bold[250 Data scientist]
-
-- 250 Engineers
-
-   - .blue.bold[75 Data engineers]
-   
-   - 50 Platform/infrastructure devs
-   
-   - 25 App devs
-   
-   - 100 other (i.e. security, networking)
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE, fig.align='center'}
-library(DiagrammeR)
-
-mermaid("
-graph BT
-A[Environment]-->B[Data ingestion]
-B-->C[Data wrangling]
-C-->D[Data analysis]
-D-->E[Modeling]
-E-->F[Post analysis]
-")
-```
-
-]
-
----
-# The problem
-
-.pull-left.font120[
-
-- Multi-environment (Azure, GCP, On-prem)
-
-]
-
-.pull-right.font120[
-
-- Common procedures with uncommon execution
-
-]
-
----
-# The problem
-
-.pull-left[
-
-- Multi-environment (Azure, GCP, On-prem)
-<br><br>
-
-- Business logic
-
-]
-
-.pull-right[
-
-- Common procedures with uncommon execution
-
-- Programmatic differences lead to variances in results
-
-]
-
----
-# The problem
-
-.pull-left[
-
-- Multi-environment (Azure, GCP, On-prem)
-<br><br>
-
-- Business logic
-<br><br>
-
-- Code quality
-
-]
-
-.pull-right[
-
-- Common procedures with uncommon execution
-
-- Programmatic differences lead to variances in results
-
-- Results in code smells and excessive code reviews
-
-]
-
----
-# The problem
-
-.pull-left[
-
-- Multi-environment (Azure, GCP, On-prem)
-<br><br>
-
-- Business logic
-<br><br>
-
-- Code quality
-<br><br>
-
-- Best practices
-
-]
-
-.pull-right[
-
-- Common procedures with uncommon execution
-
-- Programmatic differences lead to variances in results
-
-- Results in code smells and excessive code reviews
-
-- Leads to resource inefficiencies and execution inconsistencies
-
-]
-
----
-# The problem
-
-.pull-left[
-
-- Multi-environment (Azure, GCP, On-prem)
-<br><br>
-
-- Business logic
-<br><br>
-
-- Code quality
-<br><br>
-
-- Best practices
-<br><br>
-
-- Reproducibility
-
-]
-
-.pull-right[
-
-- Common procedures with uncommon execution
-
-- Programmatic differences lead to variances in results
-
-- Results in code smells and excessive code reviews
-
-- Leads to resource inefficiencies and execution inconsistencies
-
-- Debugging nightmares, migration headaches, decision maker distrust
-
-]
-
----
-# Enter APTS
-
-.pull-left[
-
-Advanced Programming & Technology Solutions (APTS) Team
-
-* Data science developers
-
-* Simplifying technology to make our data scientists more efficient
-
-* Informing & educating data scientist on technology advancements
-
-* Steering technology development to align with DSR needs
-
-
-]
-
-.pull-right[
-
-]
-
----
-# Enter APTS
-
-.pull-left[
-
-Advanced Programming & Technology Solutions (APTS) Team
-
-* .blue[Data science developers]
-
-* .blue[Simplifying technology to make our data scientists more efficient]
-
-* Informing & educating data scientist on technology advancements
-
-* Steering technology development to align with DSR needs
-
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE}
-mermaid("
-graph BT
-  A[Environment]-->B[Data ingestion]
-  B-->C[Data wrangling]
-  C-->D[Data analysis]
-  D-->E[Modeling]
-  E-->F[Post analysis]
-  G(Poirot, Component Logger, Curated Conda Env)-->H(Effodata, Seg, FileFinder)
-  H-->I(Effodata, Seg)
-  I-->J(KPI, UPC Input, Trial & Repeat)
-  J-->K(Drpyspark)
-  ")
-```
-
-]
-
----
-# An ~~open~~ inner source ecosystem is born
-
-.pull-left[
-
-
-
-```{r, echo=FALSE, eval=FALSE}
-mermaid("
-graph BT
-  A(Scarlett)-->B(PIQdata, Ecomm)
-  B-->C(Fenix, PPM, Auditorium)
-  C-->D(SNAP, Telomere )
-  D-->E(Polaris, Screenr)
-  E-->F(Polaris, Veracity)
-  ")
-```
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE}
-mermaid("
-graph BT
-  A[Environment]-->B[Data ingestion]
-  B-->C[Data wrangling]
-  C-->D[Data analysis]
-  D-->E[Modeling]
-  E-->F[Post analysis]
-  G(Poirot, Component Logger, Curated Conda Env)-->H(Effodata, Seg, FileFinder)
-  H-->I(Effodata, Seg)
-  I-->J(KPI, UPC Input, Trial & Repeat)
-  J-->K(Drpyspark)
-  ")
-```
-
-]
-
----
-# Problem #2
-
-.pull-left[
-
-Package inconsistencies
-
-]
-
-.pull-right[
-
-Packaging template tool
-
-]
-
----
-# Ecosystem characteristics
-
-.pull-left[
-
-Package characteristics
-
-- Commonly structured
-
-]
-
-.pull-right[
-
-Packages as legos
-
-]
 
 ---
 class: section-slide 
 
 <br><br><br><br><br><br><br><br><br><br><br>
-# .font150[Past research]
+# .font150[Research]
 
 ---
 # Focus areas
 
-.pull-left[
+<br>
+1. ML application for resource allocation
 
-### Machine Learning application
-
-* Improving ML interpretability
-   <br><br><br><br>
+2. ML interpretability
    
-* ML application for resource allocation
+3. Open source tool building
 
-]
+4. Inner source ecosystem (day-to-day)
 
 ---
 # Focus areas
 
-.pull-left[
+<br>
+1. .bold[ML application for resource allocation]
 
-### Machine Learning application
+   - Cyber anomaly detection [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://journals.sagepub.com/doi/full/10.1177/1748301818791503)
+   - Strategic purchasing [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.sciencedirect.com/science/article/abs/pii/S1478409217300687)
+   - Humanitarian logistics [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://link.springer.com/article/10.1007/s10479-017-2607-z)
+   - Force structure impacts to cost [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2016.1155186)
+   - Performance trend analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2015.1064046)
+   - Performance efficiency analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.jstor.org/stable/26296084?seq=1)
 
-* Improving ML interpretability
+---
+# Focus areas
+
+<br>
+1. ML application for resource allocation
+
+2. .bold[ML interpretability]
+
    - Variable importance measures [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
    - Residuals & diagnostics for binary & ordinal regression [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=Residuals+and+diagnostics+for+binary+and+ordinal+regression+models%3A+An+introduction+to+the+sure+package.&btnG=)
-   
-* ML application for resource allocation
-   - Cyber anomaly detection [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://journals.sagepub.com/doi/full/10.1177/1748301818791503)
-   - Strategic purchasing [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.sciencedirect.com/science/article/abs/pii/S1478409217300687)
-   - Humanitarian logistics [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://link.springer.com/article/10.1007/s10479-017-2607-z)
-   - Force structure impacts to cost [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2016.1155186)
-   - Performance trend analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2015.1064046)
-   - Performance efficiency analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.jstor.org/stable/26296084?seq=1)
 
+---
+# Focus areas
+
+<br>
+1. ML application for resource allocation
+
+2. ML interpretability
+   
+3. .bold[Open source tool building]
+
+  - vip package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/vip)
+  - sure package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/sure)
+  - anomalyDetection package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/anomalyDetection)
+  - KraljicMatrix package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/KraljicMatrix)<br>
+  
+---
+# Focus areas
+
+<br>
+1. ML application for resource allocation
+
+2. ML interpretability
+   
+3. Open source tool building
+
+4. .bold[Inner source ecosystem]
+
+  - Poirot: automated Spark environment configuration
+  - Effodata: data ingestion & wrangling
+  - KPI: common metric computation
+  - UPC Input: unique UPC analysis
+  - Package Template: internal package generator
+  - ...
+  
+---
+# Today's focus
+
+<br>
+1. ML application for resource allocation
+
+2. ML interpretability
+ 
+  - .bold.blue[Variable importance measures]: advance model-agnostic variable importance measures
+    
+3. Open source tool building
+
+  - .bold.blue[vip package]: provide a consistent interface for variable importance analysis
+
+4. Inner source ecosystem
+
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Interpretable machine learning]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Interpretable machine learning]
+
+.white.font120.center[What does this mean to you?]
+
+---
+
+# A mental model
+
+
+.pull-left[
+
+.bolder.font120[Philosophical: Political & Social]
+
+* Data ethics
+* Fairness, Accountability, Transparency (FAT)
+* Regulatory examples:
+   - Civil Rights Acts
+   - Americans with Disabilities Act
+   - Genetic Information Nondiscrimination Act
+   - Health Insurance Portability and Accountability Act
+   - Equal Credit Opportunity Act
+   - Fair Credit Reporting Act
+   - Fair Housing Act
+   - European Union Greater Data Privacy Regulation
+* https://www.fatml.org/resources/relevant-scholarship
+
+.center.font120.blue[___Right to explanation___]
+]
+
+
+.pull-right[
+
+```{r santa, echo=FALSE}
+knitr::include_graphics("figures/santa.jpg")
+```
+
+]
+
+
+---
+
+# A mental model
+
+
+.pull-left[
+
+```{r blackbox, echo=FALSE}
+knitr::include_graphics("figures/black-box.gif")
+```
+
+]
+
+
+.pull-right[
+
+.bolder.font120[Pragmatic: Model Logic]
+
+* Performance analysis
+  - Residual plots
+  - Lift charts
+  - ROC curves
+* Sensitivity analysis
+  - Simulated data
+  - Perturbation
+  - Accuracy vs explanation
+* Feature (aka variable, predictor) analysis
+  - Feature importance
+  - Feature effects
+
+<hr style="height:40px; visibility:hidden;" /></hr>
+
+.center.font120.blue[___Ability to explain___]
+]
+
+---
+
+# Today's focus
+
+
+.pull-left[
+
+.opacity10[
+.bolder[.font120[Philosophical: Political & Social]]
+
+* Data ethics
+* Fairness, Accountability, Transparency (FAT)
+* Regulatory examples:
+   - Civil Rights Acts
+   - Americans with Disabilities Act
+   - Genetic Information Nondiscrimination Act
+   - Health Insurance Portability and Accountability Act
+   - Equal Credit Opportunity Act
+   - Fair Credit Reporting Act
+   - Fair Housing Act
+   - European Union Greater Data Privacy Regulation
+* https://www.fatml.org/resources/relevant-scholarship
+
+.center.font120[___Right to explanation___]
+]]
+
+.pull-right[
+
+.bolder.font120[Pragmatic: Model Logic]
+
+.opacity10[
+* Performance analysis
+  - Residual plots
+  - Lift charts
+  - ROC curves
+* Sensitivity analysis
+  - Simulated data
+  - Perturbation
+  - Accuracy vs explanation]
+* Feature analysis
+  - Feature importance
+
+<hr style="height:20px; visibility:hidden;" /></hr>
+
+.center.font120.blue[___Ability to explain___]
+]
+
+]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Variable Importance]
+
+---
+# Why we care
+
+* Having a model that predicts well is only solving part of the problem
+
+* For most problems, it is just as important, if not more, to extract information about the relationships uncovered by the learning algorithm
+
+--
+
+  - _Why_ do we consider this activity to be anomalous?
+  
+  - _Why_ do we expect a customer to churn?
+  
+  - _Why_ do we expect the capital investment to produce great returns?
+  
+  - _Why_ do we suspect that person in the image is a threat?
+
+--
+
+<br>
+
+.center.content-box-grey[Decision makers want to know why and our features can be a _starting_ point.]
+
+---
+# Current problems
+
+* Model-based methods
+
+   - Examples:
+      - Linear regression: t-statistic or standardized coefficients
+      - Multi-adaptive regression splines: reduction in GCV
+      - Tree-based algorithms: average reduction in SSE
+      - Neural nets: a product of neuron weights across all layers
+--
+      - <font style="color:red">Support vector machines: ???</font>
+      - <font style="color:red">Stacked models: ???</font>
+--
+   - Not comparable
+   - Not intuitive
+
+---
+# Current problems
+
+* Model-based methods
+
+* Existing model-agnostic approaches
+
+   - Permutation
+      - Unclear whether you should use training or test data
+      - Requires truth, not just prediction
+      - Linked to the error of the model
+      - Can be skewed by correlated features
+      - Random shuffling = Lack of reproducibility
+      - Can have scaling issues
+    
+    - Shapley values
+      - Unintuitive explanations
+      - Traditional implementation does not scale
+      - TreeSHAP is fast...but model dependent
+
+---
+# Current problems
+
+* Model-based methods
+
+* Existing model-agnostic approaches
+
+* Inconsistent implementations
+
+--
+
+<br><br><br><br>
+
+.center.bold[_Data scientists need better approaches to analyze feature important._]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[A solution]
+
+
+---
+# A solution
+
+<br>
+
+.pull-left[
+
+.bold[Necessary attributes]
+
+- Simple model-agnostic approach
+
+- Easy to interpret
+
+- Scales well
+
+- Detects interactions
+
+- Creates a consistent implementation
 
 ]
 
 --
 
-.pull-right.font90[
+.pull-right[
 
-### Open source development
+.bold[Result]
 
-<br><br>
-vip package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/vip)<br>
-sure package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/sure)
-<br><br><br><br>
-anomalyDetection package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/anomalyDetection)<br>
-KraljicMatrix package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/KraljicMatrix)<br>
+1. PDP-based feature importance measure
+
+2. Open source tool for feature importance analysis
+
+]
+
+---
+# Prerequisite knowledge
+
+What is a .bold[P]artial .bold[D]ependence .bold[P]lot (aka PDP)?
+
+> _Provides the marginal effect of a feature (or subset thereof) on the predicted outcome._
+
+--
+
+First, let's talk about a different concept that will make this easier to understand.
+
+---
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+--
+
+<br>
+
+.pull-left[
+
+Say we have the given data:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# Simulate training data
+set.seed(101)  # for reproducibility
+trn <- as.data.frame(mlbench::mlbench.friedman1(500))  # ?mlbench.friedman1
+
+# Inspect data
+tibble::as_tibble(trn) %>%
+  mutate_all(round, 2) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12)
+```
+
+]
+
+.pull-right[
+
+And any given predictive model:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(randomForest)
+
+set.seed(101)  # for reproducibility
+any_model <- ppr(y ~ ., data = trn, nterms = 10)
+```
+
+```{r, collapse=TRUE, error=TRUE}
+# in this example it happens to be a projection 
+# pursuit regression
+any_model
+
+# which has no model-specific variable importance measures
+vip::vip(pp)
+```
 
 
 ]
 
 ---
-# Focus areas
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+<br>
 
 .pull-left[
 
-### Machine Learning application
+When we make predictions, the output is based on our feature values
 
-* Improving ML interpretability
-   - .bold.blue[Variable importance measures] [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
-   - Residuals & diagnostics for binary & ordinal regression [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=Residuals+and+diagnostics+for+binary+and+ordinal+regression+models%3A+An+introduction+to+the+sure+package.&btnG=)
-   
-* ML application for resource allocation
-   - Cyber anomaly detection [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://journals.sagepub.com/doi/full/10.1177/1748301818791503)
-   - Strategic purchasing [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.sciencedirect.com/science/article/abs/pii/S1478409217300687)
-   - Humanitarian logistics [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://link.springer.com/article/10.1007/s10479-017-2607-z)
-   - Force structure impacts to cost [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2016.1155186)
-   - Performance trend analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.tandfonline.com/doi/abs/10.1080/1941658X.2015.1064046)
-   - Performance efficiency analysis [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://www.jstor.org/stable/26296084?seq=1)
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+trn %>% 
+  mutate(y_hat = predict(any_model)) %>%
+  mutate_all(round, 2) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12) %>%
+  column_spec(12, background = "yellow")
+```
+
+]
+
+---
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+<br>
+
+.pull-left[
+
+Therefore, to understand how `x.1` influences the predicted values we can assess predicted values while holding `x.1` constant at certain values.
+
+
+```{r, collapse=TRUE}
+# quantiles
+summary(trn[["x.1"]])
+```
+
+]
+
+--
+
+.pull-right[
+
+E.g. - when `x.1 = 0.002379` (the min)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+min_val <- trn %>% 
+  mutate(x.1 = min(x.1))
+
+min_val %>%
+  mutate(y_hat = predict(any_model, newdata = min_val)) %>%
+  mutate_at(vars(-one_of("x.1")), round, 2) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12) %>%
+  column_spec(c(1, 12), background = "yellow")
+```
+
+]
+
+---
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+<br>
+
+.pull-left[
+
+Therefore, to understand how `x.1` influences the predicted values we can assess predicted values while holding `x.1` constant at certain values.
+
+
+```{r, collapse=TRUE}
+# quantiles
+summary(trn[["x.1"]])
+```
+
+]
+
+.pull-right[
+
+E.g. - when `x.1 = 0.500790` (the median)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+med_val <- trn %>% 
+  mutate(x.1 = median(x.1))
+
+med_val %>%
+  mutate(y_hat = predict(any_model, newdata = med_val)) %>%
+  mutate_at(vars(-one_of("x.1")), round, 2) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12) %>%
+  column_spec(c(1, 12), background = "yellow")
+```
+
+]
+
+---
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+<br>
+
+.pull-left[
+
+Therefore, to understand how `x.1` influences the predicted values we can assess predicted values while holding `x.1` constant at certain values.
+
+
+```{r, collapse=TRUE}
+# quantiles
+summary(trn[["x.1"]])
+```
+
+]
+
+.pull-right[
+
+E.g. - when `x.1 = 0.999288` (the max)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+max_val <- trn %>% 
+  mutate(x.1 = max(x.1))
+
+max_val %>%
+  mutate(y_hat = predict(any_model, newdata = max_val)) %>%
+  mutate_at(vars(-one_of("x.1")), round, 2) %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12) %>%
+  column_spec(c(1, 12), background = "yellow")
+```
+
+]
+
+---
+# Prerequisite knowledge
+
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
+
+<br>
+
+.pull-left[
+
+If we do this across a bunch of values for `x.1` we get an ICE curve plot that shows .bold[_the effect of a feature on the predicted outcome_] assuming all other features are constant.
+
+> E.g. _As each customer's income increases, how does this effect expected total spend?_
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, warning=FALSE, fig.height=5, fig.width=5}
+library(pdp)
+
+ice <- partial(any_model, pred.var = "x.1", ice = TRUE)
+
+p1 <- autoplot(ice, alpha = 0.1) +
+  ylim(range(trn$y)) +
+  theme_light()
+
+p1
+```
 
 
 ]
 
-.pull-right.font90[
+---
+# Prerequisite knowledge
 
-### Open source development
+What are .bold[I]ndividual .bold[C]onditional .bold[E]xpectation curves (aka ICE curves)? 
 
-<br><br>
-.bold.blue[vip package] [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/vip)<br>
-sure package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/sure)
-<br><br><br><br>
-anomalyDetection package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/anomalyDetection)<br>
-KraljicMatrix package [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://github.com/koalaverse/KraljicMatrix)<br>
+<br>
+
+.pull-left[
+
+And that red line, that's the average effect of `x.1` on predicted values across all observations.
+
+That is referred to as the .bold[_"partial dependence"_].
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, warning=FALSE, fig.height=5, fig.width=5}
+p1
+```
 
 
 ]
+
+---
+# Prerequisite knowledge
+
+```{r, echo=FALSE, warning=FALSE, fig.height=3.5, fig.width=9, fig.align='center'}
+features <- paste0("x.", 1:10)
+
+ice_curves <- lapply(features, FUN = function(feature) {
+  ice <- partial(any_model, pred.var = feature, ice = TRUE)
+  autoplot(ice, alpha = 0.1) + 
+    ylim(range(trn$y)) +
+    theme_light()
+})
+grid.arrange(grobs = ice_curves, ncol = 5, top = "ICE Curves")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, fig.height=3.5, fig.width=9, fig.align='center'}
+pdps <- lapply(features, FUN = function(feature) {
+  pd <- partial(any_model, pred.var = feature)
+  autoplot(pd) + 
+    ylim(range(trn$y)) + 
+    theme_light()
+})
+grid.arrange(grobs = pdps, ncol = 5, top = "PDP")
+```
+
+---
+# Prerequisite knowledge
+
+<br>
+
+.center.bold[_When you look at this plot, which features appear influential (aka important) and which do not?_]
+
+
+```{r, echo=FALSE, warning=FALSE, fig.height=3.5, fig.width=9, fig.align='center'}
+grid.arrange(grobs = pdps, ncol = 5, top = "PDP")
+```
+
+--
+
+* Plots with more variance mean those features are more influential on the predicted value.
+
+* Plots that are flat have very little influence on the predicted value.
+
+---
+# PDP-based VIP
+
+.font110[
+Partial dependence is estimated as:
+
+$$\bar{f}_s(z_s) = \frac{1}{n}\sum^n_{i=1} \hat{f}(z_s, z_{i,c})$$
+]
+
+--
+
+.font110[
+Then we measure importance based on flatness:
+
+$$i(x) = F(\bar{f_s}(z_s))$$
+]
+
+--
+
+.font110[
+And a simple measure flatness ( $F(\cdot)$ ) is standard deviation for continuous predictors and the range statistic for categorical variables:
+
+
+$$i(x_1) = \begin{cases}
+    \sqrt{\frac{1}{k-1} \sum^k_{i=1} [\bar{f}_1(x_{1i}) - \frac{1}{k} \sum^k_{i=1} \bar f_1(x_{1i})]^2 } & \text{if } x_1 \text{ is continuous}\\
+    [\text{max}_i(\bar f(x_{1i})) - \text{min}_i (\bar{f}_1(x_{1i}))] / 4 & \text{if } x_1 \text{ is categorical}
+\end{cases}$$
+
+]
+
+---
+# PDP-based VIP
+
+.pull-left[
+
+```{r, echo=FALSE, warning=FALSE, fig.height=8, fig.width=5, fig.align='center'}
+pdps <- lapply(features, FUN = function(feature) {
+  pd <- partial(any_model, pred.var = feature)
+  autoplot(pd) + 
+    ylim(range(trn$y)) + 
+    theme_light()
+})
+
+pdp_rearranged <- list(pdps[[4]], pdps[[2]], pdps[[1]], pdps[[5]], pdps[[3]],
+                       pdps[[6]], pdps[[9]], pdps[[10]], pdps[[7]], pdps[[8]])
+
+grid.arrange(grobs = pdp_rearranged, ncol = 2, top = "PDP")
+```
+
+]
+
+.pull-right[
+
+<br>
+
+```{r, echo=FALSE}
+vip::vi(any_model, method = "firm") %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 17)
+```
+
+
+]
+
+---
+# Detecting interactions
+
+TBD
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[A single interface]
 
 
 ---
@@ -846,6 +1098,7 @@ library(ranger)   # for fitting random forests
 library(rpart)    # for fitting CART-like decision trees
 library(nnet)     # feed forward neural network
 library(earth)
+library(ggplot2)
 
 # Fit a single regression tree
 tree <- rpart(y ~ ., data = trn)
@@ -868,7 +1121,7 @@ gbm <- xgboost(
 
 # Fit a LM
 lm <- lm(y ~ .^2, data = trn)
-backward <- step(linmod, direction = "backward", trace = 0)
+backward <- step(lm, direction = "backward", trace = 0)
 
 # Fit a neural network
 set.seed(0803)
@@ -994,15 +1247,16 @@ Objectives:
 
 ```{r, echo=FALSE}
 library(kableExtra)
+library(dplyr)
 options(dplyr.print_max = 1e9)
 
 as.character(methods(vi_model)) %>% 
-  str_remove_all("vi_model\\.") %>% 
-  as_tibble_col(column_name = "Models") %>%
-  rownames_to_column() %>%
+  stringr::str_remove_all("vi_model\\.") %>% 
+  tibble::as_tibble_col(column_name = "Models") %>%
+  tibble::rownames_to_column() %>%
   rename(Tally = "rowname") %>%
   kable() %>%
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 10)
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12)
 ```
 
 ]
