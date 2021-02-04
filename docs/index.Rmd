@@ -41,13 +41,13 @@ class: no-header-slide
 ]
 
 <br>
-.font150.pull-right[
+.font140.pull-right[
 
 * Who am I
 
-* Current focus
+* General research interests
 
-* Past research interests
+* Interpretable machine learning
 
 ]
 
@@ -62,22 +62,20 @@ class: no-header-slide
 
 * Data scientist (1) | Software engineer (2)
 
-* Open source development
+* Interested in applied ML research
 
-* Build tools for other data scientists
-
-* Misses ML research
+* Build open source tools for other data scientists
 
 ]
 
 <br>
-.opacity10.font150.pull-right[
+.opacity10.font140.pull-right[
 
 * Who am I
 
-* Current focus
+* General research interests
 
-* Past research interests
+* Interpretable machine learning
 
 ]
 
@@ -637,7 +635,7 @@ class: section-slide
 
 <br><br><br><br>
 
-.center.bold[_Data scientists need better approaches to analyze feature important._]
+.center.bold[_Data scientists need better approaches to analyze feature importance._]
 
 ---
 class: section-slide 
@@ -705,6 +703,7 @@ Say we have the given data:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(kableExtra)
 
 # Simulate training data
 set.seed(101)  # for reproducibility
@@ -1012,7 +1011,7 @@ $$i(x_1) = \begin{cases}
 
 .pull-left[
 
-```{r, echo=FALSE, warning=FALSE, fig.height=8, fig.width=5, fig.align='center'}
+```{r, echo=FALSE, warning=FALSE, fig.height=7.5, fig.width=5, fig.align='center'}
 pdps <- lapply(features, FUN = function(feature) {
   pd <- partial(any_model, pred.var = feature)
   autoplot(pd) + 
@@ -1044,44 +1043,200 @@ vip::vi(any_model, method = "firm") %>%
 ---
 # Detecting interactions
 
-TBD
+.pull-left.font80[
+
+- Unfortunately, PDPs can often hide interaction effects.
+
+- Our data: $$Y = 10 \sin\left(\pi x_1 x_2\right) + 20 \left(x_3 - 0.5\right) ^ 2 + 10 x_4 + 5 x_5 + \epsilon$$
+
+]
 
 ---
-class: section-slide 
+# Detecting interactions
 
-<br><br><br><br><br><br><br><br><br><br><br>
-# .font150[A single interface]
+.pull-left.font80[
 
+- Unfortunately, PDPs can often hide interaction effects.
 
----
-# Variable importance
+- Our data: $$Y = 10 \sin\left(\pi x_1 x_2\right) + 20 \left(x_3 - 0.5\right) ^ 2 + 10 x_4 + 5 x_5 + \epsilon$$
 
-.pull-left[
+- Our PDP-based VIP approach does a better job identifying actual influential features than established methods
 
-Objectives:
-
-1. Provide a single consistent interface for computing and visualizing variable importance for many types of supervised learning models across a number of packages.
-
-2. Provide model-agnostic approaches for computing variable importance.
+- But it doesn't highlight the interaction effect
 
 ]
 
 .pull-right[
 
+<br><br>
+
+```{r, echo=FALSE, fig.height=5}
+library(NeuralNetTools)  # for various tools for neural networks
+library(nnet)            # for fitting neural networks w/ a single hidden layer
+
+# Simulate data
+set.seed(101)  # for reproducibility
+trn <- as.data.frame(mlbench::mlbench.friedman1(n = 500, sd = 1))
+
+# Fit a neural network to simulated data
+set.seed(103)
+nn <- nnet(y ~ ., data = trn, size = 8, linout = TRUE, decay = 0.01,
+           maxit = 1000, trace = FALSE)
+
+# VIP: partial dependence algorithm
+p1 <- vip::vip(nn, method = "firm", feature_names = paste0("x.", 1:10)) +
+  labs(x = "", y = "Importance", title = "PDP method") +
+  theme_light()
+
+# VIP: Garson's algorithm
+nn_garson <- garson(nn, bar_plot = FALSE) %>%
+  tibble::rownames_to_column("Variable") %>%
+  select(Variable, Importance = rel_imp) %>%
+  mutate(Importance = Importance)
+p2 <- ggplot(nn_garson, aes(x = reorder(Variable, Importance), y = Importance)) +
+  geom_col() +
+  labs(x = "", y = "Importance", title = "Garson's method") +
+  coord_flip() +
+  theme_light()
+
+# VIP: Olden's algorithm
+nn_olden <- olden(nn, bar_plot = FALSE) %>%
+  tibble::rownames_to_column("Variable") %>%
+  select(Variable, Importance = importance) %>%
+  mutate(Importance = Importance)
+p3 <- ggplot(nn_olden, aes(x = reorder(Variable, Importance), y = Importance)) +
+  geom_col() +
+  labs(x = "", y = "Importance", title = "Olden's method") +
+  coord_flip() +
+  theme_light()
+
+# Display plots side by side
+grid.arrange(p1, p2, p3, ncol = 3, top = "Variable Importance for Neural Net\n")
+```
 
 ]
+
+---
+# Detecting interactions
+
+.pull-left.font80[
+
+- Unfortunately, PDPs can often hide interaction effects.
+
+- Our data: $$Y = 10 \sin\left(\pi x_1 x_2\right) + 20 \left(x_3 - 0.5\right) ^ 2 + 10 x_4 + 5 x_5 + \epsilon$$
+
+- Our PDP-based VIP approach does a better job identifying actual influential features than established methods
+
+- But it doesn't highlight the interaction effect
+
+- However, PDPs allow you to do .bold[_pairwise interaction partial dependence_]
+
+]
+
+.pull-right[
+
+<br><br>
+
+```{r, echo=FALSE, fig.height=5, message=FALSE}
+library(doParallel)  # any parallel backend supported by the foreach package should work
+registerDoParallel(cores = 4)  # use four cores
+library(gbm)
+library(vip)
+
+# Fit a GBM
+set.seed(937)
+trn.gbm <- gbm(y ~ ., data = trn, distribution = "gaussian", n.trees = 25000,
+               shrinkage = 0.01, interaction.depth = 2, bag.fraction = 1,
+               train.fraction = 0.8, cv.folds = 5, verbose = FALSE)
+best.iter <- gbm.perf(trn.gbm, method = "cv", plot.it = FALSE)
+
+# Friedman's H-statistic
+combns <- t(combn(paste0("x.", 1:10), m = 2))
+int.h <- numeric(nrow(combns))
+for (i in 1:nrow(combns)) {
+  # print(paste("iter", i, "of", nrow(combns)))
+  int.h[i] <- interact.gbm(trn.gbm, data = trn, i.var = combns[i, ], 
+                           n.trees = best.iter)
+}
+int.h <- data.frame(x = paste0(combns[, 1L], "*", combns[, 2L]), y = int.h)
+int.h <- int.h[order(int.h$y, decreasing = TRUE), ]
+
+# VI-based interaction statistic
+int.i <- vint(
+  object = trn.gbm,                    # fitted model object
+  feature_names = paste0("x.", 1:10),  # features for which to compute pairwise interactions statistics
+  n.trees = best.iter,                 # needed if object is of class "gbm"
+  parallel = TRUE
+)
+
+# Plot Friedman's H-statistics
+p1 <- ggplot(int.h[1:10, ], aes(reorder(x, y), y)) +
+  geom_col(width = 0.75) +
+  labs(x = "", y = "Interaction strength", title = "Friedman's H-statistic") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1)) +
+  theme_light() +
+  coord_flip()
+
+# Plot PDP-based interaction statistics
+p2 <- ggplot(int.i[1:10, ], aes(reorder(Variables, Interaction), Interaction)) +
+  geom_col(width = 0.75) +
+  labs(x = "", y = "Interaction strength", title = "PDP method") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1)) +
+  theme_light() +
+  coord_flip()
+
+# Display plots side by side
+grid.arrange(p2, p1, ncol = 2)
+```
+
+]
+
+---
+# A solution
+
+<br>
+
+.pull-left[
+
+.bold[Necessary attributes]
+
+- Simple model-agnostic approach `r fontawesome::fa("check", height = 15)`
+
+- Easy to interpret `r fontawesome::fa("check", height = 15)`
+
+- Scales well `r fontawesome::fa("check", height = 15)`
+
+- Detects interactions `r fontawesome::fa("check", height = 15)`
+
+- Creates a consistent implementation
+
+]
+
+.pull-right[
+
+.bold[Result]
+
+1. PDP-based feature importance measure `r fontawesome::fa("check", height = 15)`
+
+2. Open source tool for feature importance analysis
+
+]
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[A single interface] <img src="figures/logo-vip.png" align="right">
 
 ---
 # Consistent interface
 
 .pull-left[
 
-Objectives:
+Even within a single language:
 
-1. Provide a single consistent interface for computing and visualizing variable importance for many types of supervised learning models across a number of packages.
-
-  - each model requires unique approach to get variable importance data
-  - output object differs based on model
+- each model requires unique approach to get variable importance data
+- output object differs based on model
 
 ]
 
@@ -1156,13 +1311,18 @@ NeuralNetTools::garson(nn, bar_plot = FALSE)
 
 .pull-left[
 
-Objectives:
+Data scientists need to iterate, develop, and compare quickly by way of:
 
-1. Provide a single consistent interface for **computing** and visualizing variable importance for many types of supervised learning models across a number of packages.
+]
 
-  - each model requires unique approach to get variable importance data
-  - output object differs based on model
-  - .bold[vip simplifies and standardizes this process]
+---
+# Consistent interface
+
+.pull-left[
+
+Data scientists need to iterate, develop, and compare quickly by way of:
+
+* .bold[Consistent computation regardless of model type]
 
 ]
 
@@ -1187,7 +1347,6 @@ vi(lm, scale = TRUE)
 vi(nn, scale = TRUE)
 ```
 
-
 ]
 
 ---
@@ -1195,14 +1354,11 @@ vi(nn, scale = TRUE)
 
 .pull-left[
 
-Objectives:
+Data scientists need to iterate, develop, and compare quickly by way of:
 
-1. Provide a single consistent interface for computing and .bold[visualizing] variable importance for many types of supervised learning models across a number of packages.
+* Consistent computation regardless of model type
 
-  - each model requires unique approach to get variable importance data
-  - output object differs based on model
-  - vip simplifies and standardizes this process
-  - .bold[and common plotting allows for easy comparison]
+* .bold[Consistent visualizations to compare]
 
 ]
 
@@ -1219,44 +1375,62 @@ p4 <- vip(nn, scale = TRUE) + ggtitle("Neural Net")
 grid.arrange(p1, p2, p3, p4, ncol = 2)
 ```
 
-
-```{r, collapse=TRUE, message=FALSE, eval=FALSE, echo=FALSE}
-models <- list(rf = rf, gbm = gbm, mars = mars, lm = lm, nn = nn)
-model_plots <- purrr::map2(models, names(models), ~ vip(.x, scale = TRUE) + ggtitle(.y))
-do.call("grid.arrange", model_plots)
-```
-
 ]
 
 ---
+# Consistent interface
+
 .pull-left[
 
-Objectives:
+Data scientists need to iterate, develop, and compare quickly by way of:
 
-1. Provide a single consistent interface for computing and .bold[visualizing] variable importance for many types of supervised learning models across a number of packages.
+* Consistent computation regardless of model type
 
-  - each model requires unique approach to get variable importance data
-  - output object differs based on model
-  - vip simplifies and standardizes this process
-  - and common plotting allows for easy comparison
-  - .bold[supports the 34 major ML approaches in R]
+* Consistent visualizations to compare
+
+* .bold[Consistent implementation of different methods]
 
 ]
 
 .pull-right.scrollable90[
 
-```{r, echo=FALSE}
-library(kableExtra)
-library(dplyr)
-options(dplyr.print_max = 1e9)
+```{r, fig.height=5}
+# Plot VI scores via different methods
+p1 <- vip(nn, method = "model", scale = TRUE) + ggtitle("Model-based VIP")
+p2 <- vip(nn, method = "firm", scale = TRUE) + ggtitle("PDP-based VIP")
+p3 <- vip(nn, method = "permute", scale = TRUE, metric = "rsquared", target = "y", pred_wrapper = predict) + ggtitle("Permutation VIP")
+p4 <- vip(nn, method = "shap", scale = TRUE, pred_wrapper = predict) + ggtitle("SHAP VIP")
 
-as.character(methods(vi_model)) %>% 
-  stringr::str_remove_all("vi_model\\.") %>% 
-  tibble::as_tibble_col(column_name = "Models") %>%
-  tibble::rownames_to_column() %>%
-  rename(Tally = "rowname") %>%
-  kable() %>%
-  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12)
+# Display plots side by side
+grid.arrange(p1, p2, p3, p4, ncol = 2)
+```
+
+]
+
+---
+# Consistent interface
+
+.pull-left[
+
+Data scientists need to iterate, develop, and compare quickly by way of:
+
+* Consistent computation regardless of model type
+
+* Consistent visualizations to compare
+
+* Consistent implementation of different methods
+
+* .bold[Plus some extra bells & whistles]
+
+]
+
+.pull-right.scrollable90.code80[
+
+```{r, out.height="150%"}
+# Sparkline table for easy reporting
+nn %>%
+  vi(method = "firm") %>%
+  add_sparklines()
 ```
 
 ]
