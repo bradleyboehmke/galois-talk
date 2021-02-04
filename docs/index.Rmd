@@ -18,12 +18,14 @@ output:
 
 class: alt-title-slide   
 
-<br><br><br><br><br><br><br><br>
-.font200.black[Road to Galois?]
+<br><br><br><br><br><br><br>
+.font200[Feature Importance]
 
-.font120[Bradley Boehmke]
+.font140[A road to clarity]
 
-.font120[[bit.ly/bb_galois](http://bit.ly/bb_galois)]
+<br>
+.font110[Bradley Boehmke<br>Feb 5, 2021<br>[bit.ly/bb_galois](http://bit.ly/bb_galois)]
+
 
 ---
 class: section-slide 
@@ -369,7 +371,7 @@ class: section-slide
 
 2. .bold[ML interpretability]
 
-   - Variable importance measures [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
+   - Feature importance measures [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://arxiv.org/abs/1805.04755)
    - Residuals & diagnostics for binary & ordinal regression [`r fontawesome::fa("link", height = 15, fill = 'lightgrey')`](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C6&q=Residuals+and+diagnostics+for+binary+and+ordinal+regression+models%3A+An+introduction+to+the+sure+package.&btnG=)
 
 ---
@@ -414,7 +416,7 @@ class: section-slide
 
 2. ML interpretability
  
-  - .bold.blue[Variable importance measures]: advance model-agnostic variable importance measures
+  - .bold.blue[Feature importance measures]: advance model-agnostic variable importance measures
     
 3. Open source tool building
 
@@ -560,7 +562,7 @@ knitr::include_graphics("figures/black-box.gif")
 class: section-slide 
 
 <br><br><br><br><br><br><br><br><br><br><br>
-# .font150[Variable Importance]
+# .font150[Feature Importance]
 
 ---
 # Why we care
@@ -597,9 +599,9 @@ class: section-slide
       - Neural nets: a product of neuron weights across all layers
 --
       - <font style="color:red">Support vector machines: ???</font>
-      - <font style="color:red">Stacked models: ???</font>
+      - <font style="color:red">Naive Bayes: ???</font>
 --
-   - Not comparable
+   - Not comparable (i.e. <font style="color:red">Stacked models</font>)
    - Not intuitive
 
 ---
@@ -732,10 +734,10 @@ any_model <- ppr(y ~ ., data = trn, nterms = 10)
 ```{r, collapse=TRUE, error=TRUE}
 # in this example it happens to be a projection 
 # pursuit regression
-any_model
+any_model #<<
 
 # which has no model-specific variable importance measures
-vip::vip(pp)
+vip::vip(any_model)
 ```
 
 
@@ -759,6 +761,21 @@ trn %>%
   kable() %>%
   kable_styling(bootstrap_options = c("striped", "condensed"), full_width = F, font_size = 12) %>%
   column_spec(12, background = "yellow")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, fig.align='center'}
+library(DiagrammeR)
+
+mermaid("
+graph LR
+B[Features]
+B-->C{Model}
+C-->D[Predictions]
+")
 ```
 
 ]
@@ -988,7 +1005,7 @@ $$\bar{f}_s(z_s) = \frac{1}{n}\sum^n_{i=1} \hat{f}(z_s, z_{i,c})$$
 --
 
 .font110[
-Then we measure importance based on flatness:
+Then we measure importance based on flatness ( $F(\cdot)$ ):
 
 $$i(x) = F(\bar{f_s}(z_s))$$
 ]
@@ -996,7 +1013,7 @@ $$i(x) = F(\bar{f_s}(z_s))$$
 --
 
 .font110[
-And a simple measure flatness ( $F(\cdot)$ ) is standard deviation for continuous predictors and the range statistic for categorical variables:
+And a simple measure of $F(\cdot)$  is standard deviation for continuous predictors and the range statistic for categorical variables:
 
 
 $$i(x_1) = \begin{cases}
@@ -1240,7 +1257,7 @@ Even within a single language:
 
 ]
 
-.pull-right.scrollable90[
+.scrollable90.pull-right[
 
 ```{r, echo=FALSE, results='hide'}
 # Simulate training data
@@ -1435,18 +1452,59 @@ nn %>%
 
 ]
 
+---
+# Consistent interface
+
+.pull-left[
+
+Data scientists need to iterate, develop, and compare quickly by way of:
+
+* Consistent computation regardless of model type
+
+* Consistent visualizations to compare
+
+* Consistent implementation of different methods
+
+* Plus some extra bells & whistles
+
+]
+
+.pull-right.scrollable90.code80[
+
+.bold[Result:]
+
+<img src="https://cranlogs.r-pkg.org/badges/vip" style="border: 0; display:inline; margin: 0 2px; box-shadow: none">
+
+<img src="https://cranlogs.r-pkg.org/badges/grand-total/vip" style="border: 0; display:inline; margin: 0 2px; box-shadow: none">
+
+]
 
 ---
 class: section-slide 
 
 <br><br><br><br><br><br><br><br><br><br><br>
-# .font150[Final Words]
+# .font150[Improvements to be had]
 
 ---
-# Future research interests
+# Where to go from here
 
-- Advancing IML methods (statistical, visual, scale)
+<br>
+* Advancing IML methods
+   - statistical
+   - visual
+   - .bold[_scale_]
+   - prediction intervals
 
-- Model quality vs. IML trust
+* Model quality vs. IML trust
 
-- TBD
+* IML for non-supervised modeling
+
+* Language agnostic tooling
+
+* Decision support tooling
+
+---
+class: section-slide 
+
+<br><br><br><br><br><br><br><br><br><br><br>
+# .font150[Thank You!]
