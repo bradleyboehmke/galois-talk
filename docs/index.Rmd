@@ -126,39 +126,17 @@ knitr::include_graphics("figures/name-tag.png")
 .pull-right[
 
 ```{r map-home, echo=FALSE}
-#library(ggmap)
 library(leaflet)
-#register_google("AIzaSyBnYq_MgT5dwW9FJrkESKBVtUWcM_UF4Zg")
 
 home <- tibble::tibble(
    Longitude = c(-84.015850),
    Latitude = c(39.692720)
    )
 
-#us <- get_map(location='united states', zoom=4, maptype = "satellite",
-#              source='google',color='color')
-# 
-#ggmap(us) + 
-#  geom_point(data = home, aes(x = Longitude, y = Latitude)) +
-#  theme(axis.title = element_blank(),
-#        axis.text = element_blank(),
-#        axis.ticks = element_blank())
-# 
-# home %>% 
-#   qmplot(Longitude, Latitude, data = ., 
-#          maptype = "toner-background", darken = .7, size = I(2.5)) + 
-#   theme(axis.title = element_blank(),
-#         axis.text = element_blank())
-
 leaflet() %>% 
   addTiles() %>%
   setView(lat = 39.692720, lng = -84.015850, zoom=5) %>%
   addMarkers(lng=-84.015850, lat=39.692720)
-
-#leaflet() %>% 
-#  addProviderTiles('Esri.WorldImagery') %>%
-#  setView(lat = 39.692720, lng = -84.015850, zoom=5) %>%
-#  addMarkers(lng=-84.015850, lat=39.692720)
 ```
 
 ]
